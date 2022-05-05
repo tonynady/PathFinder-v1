@@ -35,7 +35,7 @@ class UserAccountView(generics.RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         instance = UserModel.objects.get(pk=request.user.pk)
-        print(f"THe instance is {instance}")
+        print(f"THe instance image is {instance.image}")
         serializer = UserSerializer(instance)
         return Response(serializer.data)
 
