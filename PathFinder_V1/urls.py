@@ -28,7 +28,7 @@ from maps.views import lobby
 class BothHttpAndHttpsSchemaGenerator(OpenAPISchemaGenerator):
     def get_schema(self, request=None, public=False):
         schema = super().get_schema(request, public)
-        schema.schemes = ["http", "https",]
+        schema.schemes = ["https",] #"http", 
         return schema
 
 schema_view = get_schema_view(
