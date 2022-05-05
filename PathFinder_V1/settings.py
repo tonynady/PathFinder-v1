@@ -159,4 +159,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #     "http://127.0.0.1:3000",
 # ]
 
-CSRF_TRUSTED_ORIGINS=['https://pathfinder-v1.herokuapp.com/', 'http://pathfinder-v1.herokuapp.com/']
+CSRF_TRUSTED_ORIGINS=['https://pathfinder-v1.herokuapp.com', 'http://pathfinder-v1.herokuapp.com']
