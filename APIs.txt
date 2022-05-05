@@ -1,0 +1,897 @@
+(1) API to GET all the Projects on the system with their data:
+{
+    "URL": "http://localhost:8000/maps/projects/",
+    "Method": "GET",
+    "Output Sample": [
+        {
+            "project_id": 2,
+            "user": 2,
+            "robot": 3,
+            "project_name": "proj_2",
+            "project_status": "Working",
+            "control_type": "Automatic",
+            "last_updated": null,
+            "project_address": "798 Maple Wood Center",
+            "map": null
+        },
+        {
+            "project_id": 3,
+            "user": 3,
+            "robot": 2,
+            "project_name": "proj_3",
+            "project_status": "Done",
+            "control_type": "Manual",
+            "last_updated": null,
+            "project_address": "7425 Holy Cross Drive",
+            "map": null
+        },
+        {
+            "project_id": 1,
+            "user": 1,
+            "robot": 1,
+            "project_name": "proj_1",
+            "project_status": "Not_Working",
+            "control_type": "Automatic",
+            "last_updated": null,
+            "project_address": "6 Oakridge Terrace",
+            "map": null
+        }
+    ]
+}
+
+
+
+(2) API to GET all the Robots on the system with their data:
+{
+    "URL": "http://localhost:8000/maps/robots/",
+    "Method": "GET",
+    "Output Sample": [
+        {
+            "robot_id": 1,
+            "robot_name": "Rob_1",
+            "robot_status": "Offline",
+            "robot_image": null
+        },
+        {
+            "robot_id": 2,
+            "robot_name": "Rob_2",
+            "robot_status": "Offline",
+            "robot_image": null
+        },
+        {
+            "robot_id": 3,
+            "robot_name": "Rob_3",
+            "robot_status": "Working",
+            "robot_image": null
+        },
+        {
+            "robot_id": 4,
+            "robot_name": "Rob_4",
+            "robot_status": "Maintainance",
+            "robot_image": null
+        }
+    ]
+}
+
+
+
+(3) API to GET all the data of a certain Project:
+{
+    "URL": "http://localhost:8000/maps/project/<int:project_id>/",
+    "Method": "GET",
+    "parameter_sent_through_URL": "project_id",
+    "Output Sample": {
+        "project_id": 2,
+        "user": 2,
+        "robot": 3,
+        "project_name": "proj_2",
+        "project_status": "Working",
+        "control_type": "Automatic",
+        "last_updated": null,
+        "project_address": "798 Maple Wood Center",
+        "map": null
+    }
+}
+
+
+
+(4) API to GET all the data of a certain Robot:
+{
+    "URL": "http://localhost:8000/maps/robot/<int:robot_id>/",
+    "Method": "GET",
+    "parameter_sent_through_URL": "robot_id",
+    "Output Sample": {
+        "robot_id": 4,
+        "robot_name": "Rob_4",
+        "robot_status": "Maintainance",
+        "robot_image": null
+    }
+}
+
+
+
+(5) API to GET all the Projects created by a certain User:
+{
+    "URL": "http://localhost:8000/maps/user/<int:user_id>/projects/",
+    "Method": "GET",
+    "parameter_sent_through_URL": "user_id",
+    "Output Sample": [
+        {
+            "project_id": 3,
+            "user": 3,
+            "robot": 2,
+            "project_name": "proj_3",
+            "project_status": "Done",
+            "control_type": "Manual",
+            "last_updated": null,
+            "project_address": "7425 Holy Cross Drive",
+            "map": null
+        }
+    ]
+}
+
+
+
+(6) API to GET all the Projects created by a certain Robot:
+{
+    "URL": "http://localhost:8000/maps/robot/<int:robot_id>/projects/",
+    "Method": "GET",
+    "parameter_sent_through_URL": "robot_id",
+    "Output Sample": [
+        {
+            "project_id": 1,
+            "user": 1,
+            "robot": 1,
+            "project_name": "proj_1",
+            "project_status": "Not_Working",
+            "control_type": "Automatic",
+            "last_updated": null,
+            "project_address": "6 Oakridge Terrace",
+            "map": null
+        }
+    ]
+}
+
+
+
+(7) API to GET all the data collected by a certain Project:
+{
+    "URL": "http://localhost:8000/maps/project/<int:project_id>/data/",
+    "Method": "GET",
+    "parameter_sent_through_URL": "project_id",
+    "Output Sample": [
+        {
+            "project_data_id": 1001,
+            "project": 2,
+            "x_position": "977.70834",
+            "y_position": "117.77245",
+            "angle": "358.02181",
+            "speed": "786.02889",
+            "temperature": "-5.86736",
+            "humidity": "86.91493",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "358.87541",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.919836Z"
+        },
+        {
+            "project_data_id": 1002,
+            "project": 2,
+            "x_position": "323.32121",
+            "y_position": "470.73404",
+            "angle": "125.52688",
+            "speed": "313.09650",
+            "temperature": "-1.44616",
+            "humidity": "49.13526",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.925621Z"
+        },
+        {
+            "project_data_id": 1003,
+            "project": 2,
+            "x_position": "-48.28985",
+            "y_position": "547.54068",
+            "angle": "204.71281",
+            "speed": "204.49048",
+            "temperature": "14.95800",
+            "humidity": "17.51367",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.927994Z"
+        },
+        {
+            "project_data_id": 1004,
+            "project": 2,
+            "x_position": "-665.34244",
+            "y_position": "219.71254",
+            "angle": "111.43420",
+            "speed": "822.80035",
+            "temperature": "56.08570",
+            "humidity": "89.54208",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "599.31858",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.930599Z"
+        },
+        {
+            "project_data_id": 1005,
+            "project": 2,
+            "x_position": "-773.02131",
+            "y_position": "-265.58585",
+            "angle": "17.86205",
+            "speed": "906.83846",
+            "temperature": "41.24001",
+            "humidity": "52.26672",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.932911Z"
+        },
+        {
+            "project_data_id": 1006,
+            "project": 2,
+            "x_position": "-477.86394",
+            "y_position": "-445.91139",
+            "angle": "221.71597",
+            "speed": "34.11098",
+            "temperature": "-16.55250",
+            "humidity": "7.90846",
+            "gas_type": "Hydrogen Fluoride",
+            "gas_reading": "831.88078",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.934746Z"
+        },
+        {
+            "project_data_id": 1007,
+            "project": 2,
+            "x_position": "581.71162",
+            "y_position": "323.66608",
+            "angle": "318.37738",
+            "speed": "683.82016",
+            "temperature": "41.66348",
+            "humidity": "39.91481",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "850.47263",
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:37.936546Z"
+        },
+        {
+            "project_data_id": 1008,
+            "project": 2,
+            "x_position": "344.83872",
+            "y_position": "718.48170",
+            "angle": "142.72282",
+            "speed": "254.51328",
+            "temperature": "44.32241",
+            "humidity": "67.75054",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "126.00953",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.937773Z"
+        },
+        {
+            "project_data_id": 1009,
+            "project": 2,
+            "x_position": "831.80267",
+            "y_position": "-865.60663",
+            "angle": "37.55911",
+            "speed": "844.30330",
+            "temperature": "33.29422",
+            "humidity": "81.73208",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.938950Z"
+        },
+        {
+            "project_data_id": 1010,
+            "project": 2,
+            "x_position": "-702.09880",
+            "y_position": "865.40190",
+            "angle": "63.29412",
+            "speed": "567.06107",
+            "temperature": "21.95924",
+            "humidity": "35.96572",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.940272Z"
+        },
+        {
+            "project_data_id": 1011,
+            "project": 2,
+            "x_position": "-961.50589",
+            "y_position": "978.23482",
+            "angle": "100.85727",
+            "speed": "698.49358",
+            "temperature": "7.23618",
+            "humidity": "1.13484",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:37.941510Z"
+        },
+        {
+            "project_data_id": 1012,
+            "project": 2,
+            "x_position": "-963.69160",
+            "y_position": "554.18458",
+            "angle": "113.79818",
+            "speed": "733.41885",
+            "temperature": "0.74263",
+            "humidity": "40.73089",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:37.942825Z"
+        },
+        {
+            "project_data_id": 1013,
+            "project": 2,
+            "x_position": "-784.09655",
+            "y_position": "-626.27931",
+            "angle": "186.03603",
+            "speed": "512.51019",
+            "temperature": "52.39279",
+            "humidity": "70.16635",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.944904Z"
+        },
+        {
+            "project_data_id": 1014,
+            "project": 2,
+            "x_position": "892.85830",
+            "y_position": "-698.93895",
+            "angle": "12.55246",
+            "speed": "869.23159",
+            "temperature": "7.56584",
+            "humidity": "44.61517",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:37.946162Z"
+        },
+        {
+            "project_data_id": 1015,
+            "project": 2,
+            "x_position": "897.79079",
+            "y_position": "870.38342",
+            "angle": "329.45251",
+            "speed": "937.64247",
+            "temperature": "5.99402",
+            "humidity": "54.52364",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.947556Z"
+        },
+        {
+            "project_data_id": 1016,
+            "project": 2,
+            "x_position": "583.41788",
+            "y_position": "-110.47819",
+            "angle": "94.44446",
+            "speed": "487.31164",
+            "temperature": "49.70138",
+            "humidity": "8.42805",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.948612Z"
+        },
+        {
+            "project_data_id": 1017,
+            "project": 2,
+            "x_position": "-627.32269",
+            "y_position": "438.48638",
+            "angle": "178.75072",
+            "speed": "584.02543",
+            "temperature": "28.47799",
+            "humidity": "95.89732",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:37.949945Z"
+        },
+        {
+            "project_data_id": 1018,
+            "project": 2,
+            "x_position": "183.67647",
+            "y_position": "-826.85009",
+            "angle": "153.70372",
+            "speed": "567.67100",
+            "temperature": "25.83317",
+            "humidity": "3.86874",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:37.951101Z"
+        },
+        {
+            "project_data_id": 1019,
+            "project": 2,
+            "x_position": "-458.49781",
+            "y_position": "-987.20186",
+            "angle": "21.76413",
+            "speed": "256.18289",
+            "temperature": "-19.51498",
+            "humidity": "50.27896",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.952356Z"
+        },
+        {
+            "project_data_id": 1020,
+            "project": 2,
+            "x_position": "-941.32726",
+            "y_position": "-128.16395",
+            "angle": "81.97991",
+            "speed": "263.83812",
+            "temperature": "43.47931",
+            "humidity": "69.10276",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.953591Z"
+        },
+        {
+            "project_data_id": 1021,
+            "project": 2,
+            "x_position": "-910.73947",
+            "y_position": "68.61185",
+            "angle": "319.94699",
+            "speed": "473.24084",
+            "temperature": "23.04655",
+            "humidity": "71.76766",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:37.954924Z"
+        },
+        {
+            "project_data_id": 1022,
+            "project": 2,
+            "x_position": "-218.85461",
+            "y_position": "225.91833",
+            "angle": "117.29637",
+            "speed": "810.36604",
+            "temperature": "30.55510",
+            "humidity": "91.02721",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:37.957055Z"
+        },
+        {
+            "project_data_id": 1023,
+            "project": 2,
+            "x_position": "584.08147",
+            "y_position": "-246.19484",
+            "angle": "186.46241",
+            "speed": "37.58705",
+            "temperature": "1.08096",
+            "humidity": "36.90343",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.959484Z"
+        },
+        {
+            "project_data_id": 1024,
+            "project": 2,
+            "x_position": "924.40843",
+            "y_position": "-714.07720",
+            "angle": "156.57388",
+            "speed": "163.06024",
+            "temperature": "42.44350",
+            "humidity": "27.38438",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:37.965665Z"
+        },
+        {
+            "project_data_id": 1025,
+            "project": 2,
+            "x_position": "-303.33375",
+            "y_position": "702.71062",
+            "angle": "253.65147",
+            "speed": "126.47005",
+            "temperature": "10.90829",
+            "humidity": "70.77474",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.973319Z"
+        }
+    ]
+}
+
+
+
+(8) API to GET all the Poisonous data collected by a certain Project:
+{
+    "URL": "http://localhost:8000/maps/project/<int:project_id>/data/poisonous/",
+    "Method": "GET",
+    "parameter_sent_through_URL": "project_id",
+    "Output Sample": [
+        {
+            "project_data_id": 1001,
+            "project": 2,
+            "x_position": "977.70834",
+            "y_position": "117.77245",
+            "angle": "358.02181",
+            "speed": "786.02889",
+            "temperature": "-5.86736",
+            "humidity": "86.91493",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "358.87541",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.919836Z"
+        },
+        {
+            "project_data_id": 1004,
+            "project": 2,
+            "x_position": "-665.34244",
+            "y_position": "219.71254",
+            "angle": "111.43420",
+            "speed": "822.80035",
+            "temperature": "56.08570",
+            "humidity": "89.54208",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "599.31858",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.930599Z"
+        },
+        {
+            "project_data_id": 1006,
+            "project": 2,
+            "x_position": "-477.86394",
+            "y_position": "-445.91139",
+            "angle": "221.71597",
+            "speed": "34.11098",
+            "temperature": "-16.55250",
+            "humidity": "7.90846",
+            "gas_type": "Hydrogen Fluoride",
+            "gas_reading": "831.88078",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.934746Z"
+        },
+        {
+            "project_data_id": 1007,
+            "project": 2,
+            "x_position": "581.71162",
+            "y_position": "323.66608",
+            "angle": "318.37738",
+            "speed": "683.82016",
+            "temperature": "41.66348",
+            "humidity": "39.91481",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "850.47263",
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:37.936546Z"
+        },
+        {
+            "project_data_id": 1008,
+            "project": 2,
+            "x_position": "344.83872",
+            "y_position": "718.48170",
+            "angle": "142.72282",
+            "speed": "254.51328",
+            "temperature": "44.32241",
+            "humidity": "67.75054",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "126.00953",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.937773Z"
+        },
+        {
+            "project_data_id": 1036,
+            "project": 2,
+            "x_position": "-213.67635",
+            "y_position": "841.61964",
+            "angle": "88.78348",
+            "speed": "64.31134",
+            "temperature": "54.49205",
+            "humidity": "77.88631",
+            "gas_type": "Carbon Monoxide",
+            "gas_reading": "863.86809",
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:38.020325Z"
+        },
+        {
+            "project_data_id": 1039,
+            "project": 2,
+            "x_position": "-299.54132",
+            "y_position": "-885.09657",
+            "angle": "79.87727",
+            "speed": "364.64286",
+            "temperature": "35.44419",
+            "humidity": "70.58739",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "795.19446",
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:38.039858Z"
+        },
+        {
+            "project_data_id": 1043,
+            "project": 2,
+            "x_position": "798.51196",
+            "y_position": "797.56387",
+            "angle": "86.85887",
+            "speed": "477.82337",
+            "temperature": "-12.31883",
+            "humidity": "41.25463",
+            "gas_type": "Hydrogen Sulfide",
+            "gas_reading": "525.77427",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:38.072156Z"
+        },
+        {
+            "project_data_id": 1047,
+            "project": 2,
+            "x_position": "843.00492",
+            "y_position": "636.66823",
+            "angle": "226.84838",
+            "speed": "65.51019",
+            "temperature": "-2.62019",
+            "humidity": "72.20790",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "325.74794",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:38.107653Z"
+        },
+        {
+            "project_data_id": 1052,
+            "project": 2,
+            "x_position": "273.00011",
+            "y_position": "-918.34211",
+            "angle": "321.45531",
+            "speed": "100.32654",
+            "temperature": "-18.08690",
+            "humidity": "35.23220",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "88.58324",
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:38.149361Z"
+        },
+        {
+            "project_data_id": 1054,
+            "project": 2,
+            "x_position": "-587.66672",
+            "y_position": "347.29048",
+            "angle": "324.14194",
+            "speed": "779.37384",
+            "temperature": "53.08802",
+            "humidity": "89.71449",
+            "gas_type": "Carbon Dioxide",
+            "gas_reading": "604.20880",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:38.165582Z"
+        },
+        {
+            "project_data_id": 1056,
+            "project": 2,
+            "x_position": "-610.50778",
+            "y_position": "-754.45464",
+            "angle": "180.13783",
+            "speed": "654.65973",
+            "temperature": "-0.82573",
+            "humidity": "3.92188",
+            "gas_type": "Hydrogen Fluoride",
+            "gas_reading": "827.84074",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:38.172360Z"
+        },
+        {
+            "project_data_id": 1060,
+            "project": 2,
+            "x_position": "-921.56009",
+            "y_position": "-782.07712",
+            "angle": "82.74077",
+            "speed": "947.48515",
+            "temperature": "3.84839",
+            "humidity": "12.54842",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "773.20714",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:38.196864Z"
+        },
+        {
+            "project_data_id": 1069,
+            "project": 2,
+            "x_position": "593.49415",
+            "y_position": "810.81203",
+            "angle": "90.44299",
+            "speed": "139.67067",
+            "temperature": "-7.44152",
+            "humidity": "47.52316",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "410.48025",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:38.251777Z"
+        },
+        {
+            "project_data_id": 1072,
+            "project": 2,
+            "x_position": "-979.85194",
+            "y_position": "-853.83051",
+            "angle": "183.25781",
+            "speed": "229.89532",
+            "temperature": "40.62168",
+            "humidity": "38.00698",
+            "gas_type": "Hydrogen Sulfide",
+            "gas_reading": "790.33710",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:38.272223Z"
+        }
+    ]
+}
+
+
+
+(9) API to get all the Poisonous data collected by a certain Project with certain Gas type(s):
+{
+    "URL": "http://localhost:8000/maps/project/<int:project_id>/data/poisonous/",
+    "Method": "POST",
+    "parameter_sent_through_URL": "project_id",
+    "parameter_sent_through_Request_Data": "List of Gas type(s)",
+    "Example_for_the_post_data_to_be_sent": {"gas_type": ["Carbon Monoxide", "Hydrogen Sulfide"]},
+    "Output Sample": [
+        {
+            "project_data_id": 1036,
+            "project": 2,
+            "x_position": "-213.67635",
+            "y_position": "841.61964",
+            "angle": "88.78348",
+            "speed": "64.31134",
+            "temperature": "54.49205",
+            "humidity": "77.88631",
+            "gas_type": "Carbon Monoxide",
+            "gas_reading": "863.86809",
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:38.020325Z"
+        },
+        {
+            "project_data_id": 1043,
+            "project": 2,
+            "x_position": "798.51196",
+            "y_position": "797.56387",
+            "angle": "86.85887",
+            "speed": "477.82337",
+            "temperature": "-12.31883",
+            "humidity": "41.25463",
+            "gas_type": "Hydrogen Sulfide",
+            "gas_reading": "525.77427",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:38.072156Z"
+        },
+        {
+            "project_data_id": 1072,
+            "project": 2,
+            "x_position": "-979.85194",
+            "y_position": "-853.83051",
+            "angle": "183.25781",
+            "speed": "229.89532",
+            "temperature": "40.62168",
+            "humidity": "38.00698",
+            "gas_type": "Hydrogen Sulfide",
+            "gas_reading": "790.33710",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:38.272223Z"
+        },
+        {
+            "project_data_id": 1141,
+            "project": 2,
+            "x_position": "778.58387",
+            "y_position": "-518.79822",
+            "angle": "170.15419",
+            "speed": "830.64630",
+            "temperature": "46.06530",
+            "humidity": "58.28665",
+            "gas_type": "Carbon Monoxide",
+            "gas_reading": "255.36878",
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:38.976316Z"
+        },
+        {
+            "project_data_id": 1163,
+            "project": 2,
+            "x_position": "-203.60150",
+            "y_position": "-635.33793",
+            "angle": "143.74873",
+            "speed": "858.68857",
+            "temperature": "28.98870",
+            "humidity": "58.37897",
+            "gas_type": "Hydrogen Sulfide",
+            "gas_reading": "921.13961",
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:39.142166Z"
+        },
+        {
+            "project_data_id": 1192,
+            "project": 2,
+            "x_position": "-251.29143",
+            "y_position": "-611.12223",
+            "angle": "327.81451",
+            "speed": "574.24751",
+            "temperature": "38.90682",
+            "humidity": "89.40811",
+            "gas_type": "Carbon Monoxide",
+            "gas_reading": "690.76072",
+            "control_type": "Manual",
+            "time_collected": "2022-01-15T11:15:39.323224Z"
+        }
+    ]
+}
+
+
+
+(10) API to get all the data collected by a certain Project within any specific Time Range:
+{
+    "URL": "http://localhost:8000/maps/project/<int:project_id>/data/range/",
+    "Method": "POST",
+    "parameter_sent_through_URL": "project_id",
+    "parameter_sent_through_Request_Data": "Two timestamps",
+    "Example_for_the_post_data_to_be_sent": {"inst1": "2022-01-15T11:15:37.919836Z","inst2": "2022-01-15T11:15:37.927994Z"},
+    "Output Sample": [
+        {
+            "project_data_id": 1001,
+            "project": 2,
+            "x_position": "977.70834",
+            "y_position": "117.77245",
+            "angle": "358.02181",
+            "speed": "786.02889",
+            "temperature": "-5.86736",
+            "humidity": "86.91493",
+            "gas_type": "Volatile Organic Compounds",
+            "gas_reading": "358.87541",
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.919836Z"
+        },
+        {
+            "project_data_id": 1002,
+            "project": 2,
+            "x_position": "323.32121",
+            "y_position": "470.73404",
+            "angle": "125.52688",
+            "speed": "313.09650",
+            "temperature": "-1.44616",
+            "humidity": "49.13526",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.925621Z"
+        },
+        {
+            "project_data_id": 1003,
+            "project": 2,
+            "x_position": "-48.28985",
+            "y_position": "547.54068",
+            "angle": "204.71281",
+            "speed": "204.49048",
+            "temperature": "14.95800",
+            "humidity": "17.51367",
+            "gas_type": null,
+            "gas_reading": null,
+            "control_type": "Automatic",
+            "time_collected": "2022-01-15T11:15:37.927994Z"
+        }
+    ]
+}
+
+
+
+(11) API to GET all the Camera Frames related to a certain Project:
+{
+    "URL": "http://localhost:8000/maps/project/<int:project_id>/frames/",
+    "Method": "GET",
+    "parameter_sent_through_URL": "project_id",
+    "Output Sample": []    //No Frames Inserted Yet
+}
