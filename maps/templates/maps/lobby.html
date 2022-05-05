@@ -24,10 +24,12 @@
     <script type="text/javascript">
         // let url = `wss://${window.location.host}/ws/socket-server/35/`
         // let url = `ws://${window.location.host}/ws/socket-server/35/`
-        let url = `ws://${window.location.host}/ws/startproject/`
+        // let url = `ws://${window.location.host}/ws/startproject/`
+        let url = `wss://${window.location.host}/ws/startproject/`
         const chatSocket = new WebSocket(url)
 
-        let url2 = `ws://${window.location.host}/ws/startproject/1/`
+        // let url2 = `ws://${window.location.host}/ws/startproject/1/`
+        let url2 = `wss://${window.location.host}/ws/startproject/1/`
         const chatSocket2 = new WebSocket(url2)
 
         chatSocket.onmessage = function(e){
