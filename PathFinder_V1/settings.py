@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-t%ukf#*inkshh%c6r$smsrub*(0yr5k*crk0vkv((+e)ueu5xz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = ['pathfinder-v1.herokuapp.com', '127.0.0.1', 'localhost']
 
@@ -97,10 +97,10 @@ CHANNEL_LAYERS = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'projecttest', 
+#         'NAME': 'pathfinder_db', 
 #         'USER': 'postgres', 
 #         'PASSWORD': '9999DB7777tn',
-#         'HOST': '127.0.0.1', 
+#         'HOST': 'database-1.cub96gg2jujd.us-east-1.rds.amazonaws.com', 
 #         'PORT': '5432',
 #     }
 # }
