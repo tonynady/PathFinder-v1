@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-t%ukf#*inkshh%c6r$smsrub*(0yr5k*crk0vkv((+e)ueu5xz
 # DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://pathfinder-v1.herokuapp.com/', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['pathfinder-v1.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
