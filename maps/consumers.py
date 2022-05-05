@@ -97,7 +97,8 @@ class ProjectDataConsumer(AsyncWebsocketConsumer):
     async def disconnect(self, close_code):
         # Leave room group
         self.project.is_working = False
-        self.robot.is_assigned = False
+        if self.project.is_done:
+            self.robot.is_assigned = False
         self.robot.at_maintainance = True
         await database_sync_to_async(self.project.save)()
         await database_sync_to_async(self.robot.save)()
