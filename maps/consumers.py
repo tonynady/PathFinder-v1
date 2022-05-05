@@ -51,7 +51,6 @@ class StartProjectConsumer(AsyncWebsocketConsumer):
 
 class ProjectDataConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        print("Helloooo..................")
         self.project_id = self.scope['url_route']['kwargs']['project_id']
         self.project = await database_sync_to_async(Project.objects.get)(project_id = self.project_id)
         self.project.is_working = True
