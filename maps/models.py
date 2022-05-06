@@ -46,7 +46,7 @@ class Project(models.Model):
     control_choices = (('Manual', 'Manual'), ('Automatic', 'Automatic'))
     control_type = models.CharField(max_length=15, choices=control_choices)
     created = models.DateTimeField(auto_now_add=True)
-    last_updated = models.DateTimeField(auto_now=True, blank=True)
+    last_updated = models.DateTimeField(auto_now=True, blank=True, null=True)
     map = models.TextField(blank=True, null=True)  # This field type is a guess.
     project_address = models.CharField(max_length=50)
 
