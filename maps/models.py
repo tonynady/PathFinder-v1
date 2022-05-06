@@ -49,7 +49,6 @@ class Project(models.Model):
     last_updated = models.DateTimeField(auto_now=True, blank=True, null=True)
     map = models.TextField(blank=True, null=True)  # This field type is a guess.
     project_address = models.CharField(max_length=50)
-    x = models.CharField(max_length=3, null=True, blank=True)
 
     class Meta:
         managed = True
@@ -68,7 +67,7 @@ class ProjectData(models.Model):
     gas_type = models.CharField(max_length=100, blank=True, null=True)
     gas_reading = models.DecimalField(max_digits=15, decimal_places=5, blank=True, null=True)
     control_type = models.CharField(max_length=15)
-    time_collected = models.DateTimeField(auto_now=True)
+    time_collected = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         managed = True
