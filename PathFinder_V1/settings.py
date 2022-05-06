@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-t%ukf#*inkshh%c6r$smsrub*(0yr5k*crk0vkv((+e)ueu5xz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = False
+# DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['pathfinder-v1.herokuapp.com', '127.0.0.1', 'localhost']
 
