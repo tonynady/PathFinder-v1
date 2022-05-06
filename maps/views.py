@@ -35,8 +35,11 @@ class UserAccountView(generics.RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         instance = UserModel.objects.get(pk=request.user.pk)
-        print(f"THe instance image is {instance.image}")
-        serializer = UserSerializer(instance)
+        
+        # serializer = UserSerializer(instance) #will not get the BASE_DIR for images!
+        #the next will!!!, probably bec of 'context' being passed to the serializer init, 
+        # through get_serializer_context(), that have the 'request' object that has the 'HOST'
+        serializer = self.get_serializer(instance)
         return Response(serializer.data)
 
 class UserDetailAPIView(generics.RetrieveAPIView):
