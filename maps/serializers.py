@@ -53,7 +53,7 @@ class UserSerializer(serializers.ModelSerializer):
             validators=[UniqueValidator(queryset=UserModel.objects.all())]
             )
     password = serializers.CharField(write_only=True)
-    # phone = serializers.CharField(validators=[UniqueValidator(queryset=UserModel.objects.all())], allow_null=True, required=False)
+    phone = serializers.CharField(validators=[UniqueValidator(queryset=UserModel.objects.all())], allow_null=True, required=False)
 
     def create(self, validated_data):
         kwargs={}
