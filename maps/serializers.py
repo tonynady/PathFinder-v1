@@ -28,25 +28,14 @@ class UserSerializer(serializers.ModelSerializer):
     phone = serializers.CharField(validators=[UniqueValidator(queryset=UserModel.objects.all())], required=False)
 
     def create(self, validated_data):
-        if validated_data['image']:
-            user = UserModel.objects.create_user(
-                username=validated_data['username'], 
-                email=validated_data['email'],
-                password=validated_data['password'],
-                first_name=validated_data['first_name'],
-                last_name=validated_data['last_name'],
-                phone = validated_data['phone'],
-                image = validated_data['image'],
-            )
-        else:
-            user = UserModel.objects.create_user(
-                username=validated_data['username'], 
-                email=validated_data['email'],
-                password=validated_data['password'],
-                first_name=validated_data['first_name'],
-                last_name=validated_data['last_name'],
-                phone = validated_data['phone'],
-            )
+        user = UserModel.objects.create_user(
+            username=validated_data['username'], 
+            email=validated_data['email'],
+            password=validated_data['password'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            phone = validated_data['phone'],
+        )
         return user
         
     def update(self, instance, validated_data):
