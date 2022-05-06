@@ -49,6 +49,7 @@ class Project(models.Model):
     last_updated = models.DateTimeField(auto_now=True, blank=True, null=True)
     map = models.TextField(blank=True, null=True)  # This field type is a guess.
     project_address = models.CharField(max_length=50)
+    x = models.CharField(max_length=3, null=True, blank=True)
 
     class Meta:
         managed = True
