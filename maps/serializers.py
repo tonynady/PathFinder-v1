@@ -17,32 +17,35 @@ class UserPublicSerializer(serializers.Serializer):
     username = serializers.CharField(read_only=True)
     email = serializers.EmailField(read_only=True)
 
-# class UserCreateSerializer(serializers.ModelSerializer):
-#     email = serializers.EmailField(
-#             validators=[UniqueValidator(queryset=UserModel.objects.all())]
-#             )
-#     username = serializers.CharField(
-#             validators=[UniqueValidator(queryset=UserModel.objects.all())]
-#             )
-#     password = serializers.CharField(write_only=True)
-#     phone = serializers.CharField(validators=[UniqueValidator(queryset=UserModel.objects.all())], required=False)
+class UserCreateSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(
+            validators=[UniqueValidator(queryset=UserModel.objects.all())]
+            )
+    username = serializers.CharField(
+            validators=[UniqueValidator(queryset=UserModel.objects.all())]
+            )
+    password = serializers.CharField(write_only=True)
+    phone = serializers.CharField(validators=[UniqueValidator(queryset=UserModel.objects.all())], required=False)
 
-    # def create(self, validated_data):
-    #     user = UserModel.objects.create_user(
-    #         username=validated_data['username'], 
-    #         email=validated_data['email'],
-    #         password=validated_data['password'],
-    #         first_name=validated_data['first_name'],
-    #         last_name=validated_data['last_name'],
-    #     )
-    #     return user
-#     class Meta:
-#         model = UserModel
-#         fields = [
-
-#         ]
-
-
+    def create(self, validated_data):
+        user = UserModel.objects.create_user(
+            username=validated_data['username'], 
+            email=validated_data['email'],
+            password=validated_data['password'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+        )
+        return user
+    class Meta:
+        model = UserModel
+        fields = [
+            'id', 
+            'first_name', 
+            'last_name', 
+            'username', 
+            'email', 
+            'password',
+        ]
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -54,13 +57,6 @@ class UserSerializer(serializers.ModelSerializer):
             )
     password = serializers.CharField(write_only=True)
     phone = serializers.CharField(validators=[UniqueValidator(queryset=UserModel.objects.all())], allow_null=True, required=False)
-
-    def create(self, validated_data):
-        kwargs={}
-        for (key, value) in validated_data.items():
-            kwargs[key] = value
-        user = UserModel.objects.create_user(**kwargs)
-        return user
         
     def update(self, instance, validated_data):
         password = validated_data.pop('password', None)

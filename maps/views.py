@@ -14,6 +14,7 @@ from .serializers import (
     RobotSerializer, 
     UserSerializer,
     UserLoginSerializer,
+    UserCreateSerializer,
     #CameraFrameSerializer,
 )
 
@@ -23,7 +24,7 @@ def lobby(request):
 
 
 class RegisterAPIView(generics.CreateAPIView):
-    serializer_class = UserSerializer
+    serializer_class = UserCreateSerializer
 
 class UserAccountView(generics.RetrieveAPIView):
     '''
