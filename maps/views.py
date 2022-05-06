@@ -35,7 +35,7 @@ class UserAccountView(generics.RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         instance = UserModel.objects.get(pk=request.user.pk)
-        
+
         # serializer = UserSerializer(instance) #will not get the BASE_DIR for images!
         #the next will!!!, probably bec of 'context' being passed to the serializer init, 
         # through get_serializer_context(), that have the 'request' object that has the 'HOST'
@@ -81,7 +81,7 @@ class UserListAPIView(generics.ListAPIView):
             status=status.HTTP_403_FORBIDDEN
         )
 
-class UpdateUserAPIView(generics.UpdateAPIView):
+class UserUpdateAPIView(generics.UpdateAPIView):
     '''
     Update the logged in user's object.
     The superusers only can update any user.
@@ -107,7 +107,7 @@ class UpdateUserAPIView(generics.UpdateAPIView):
             instance._prefetched_objects_cache = {}
         return Response(serializer.data)
 
-class DeleteUserAPIView(generics.DestroyAPIView):
+class UserDeleteAPIView(generics.DestroyAPIView):
     '''
     Delete the logged in user's object.
     The superusers only can delete any user.
@@ -151,7 +151,7 @@ class LogoutView(APIView):
         return Response(data={'detail':'Logged out'}, status=status.HTTP_204_NO_CONTENT)
 
 
-class CreateProjectAPIView(generics.CreateAPIView):
+class ProjectCreateAPIView(generics.CreateAPIView):
     '''
     Create a Project for the logged in user.
     '''
@@ -219,7 +219,7 @@ class ProjectDetailAPIView(generics.RetrieveAPIView):
             return qs
         return qs.filter(user = self.request.user)
 
-class UpdateProjectAPIView(generics.UpdateAPIView):
+class ProjectUpdateAPIView(generics.UpdateAPIView):
     '''
     Update a project related to a certain user.
     The superusers only can update any project.
@@ -250,7 +250,7 @@ class UpdateProjectAPIView(generics.UpdateAPIView):
             instance._prefetched_objects_cache = {}
         return Response(serializer.data)
 
-class DeleteProjectAPIView(generics.DestroyAPIView):
+class ProjectDeleteAPIView(generics.DestroyAPIView):
     '''
     Delete a project related to a certain user.
     The superusers can delete any project.
@@ -273,7 +273,7 @@ class DeleteProjectAPIView(generics.DestroyAPIView):
         instance.delete()
 
 
-class CreateRobotAPIView(generics.CreateAPIView):
+class RobotCreateAPIView(generics.CreateAPIView):
     '''
     Create a New Robot. Only admins can create robots.
     '''
@@ -305,7 +305,7 @@ class RobotDetailAPIView(generics.RetrieveAPIView):
     authentication_classes = [authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
-class UpdateRobotAPIView(generics.UpdateAPIView):
+class RobotUpdateAPIView(generics.UpdateAPIView):
     '''
     Update a certain robot. Only admins can update robots.
     '''
@@ -327,7 +327,7 @@ class UpdateRobotAPIView(generics.UpdateAPIView):
             instance._prefetched_objects_cache = {}
         return Response(serializer.data)
 
-class DeleteRobotAPIView(generics.DestroyAPIView):
+class RobotDeleteAPIView(generics.DestroyAPIView):
     '''
     Delete a Robot. Only admins can delete robots.
     '''
@@ -385,7 +385,7 @@ class ProjectDataWithinRange(generics.CreateAPIView):
             status=status.HTTP_403_FORBIDDEN
         )
 
-class ProjectPoisonousData(generics.ListCreateAPIView):
+class ProjectDataPoisonous(generics.ListCreateAPIView):
     serializer_class = ProjectDataSerializer
     authentication_classes = [authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
