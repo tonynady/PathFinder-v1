@@ -94,7 +94,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 class CreateUpdateProjectSerializer(serializers.ModelSerializer):
     user = serializers.CharField(read_only=True)
-    created = serializers.DateTimeField(read_only=True)
+    # created = serializers.DateTimeField(read_only=True)
     class Meta:
         model = Project
         fields = [
@@ -104,7 +104,7 @@ class CreateUpdateProjectSerializer(serializers.ModelSerializer):
             'project_name',
             'control_type',
             'project_address',
-            'created',
+            # 'created',
         ]
 
 class ProjectDataSerializer(serializers.ModelSerializer):
