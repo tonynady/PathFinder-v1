@@ -17,6 +17,34 @@ class UserPublicSerializer(serializers.Serializer):
     username = serializers.CharField(read_only=True)
     email = serializers.EmailField(read_only=True)
 
+# class UserCreateSerializer(serializers.ModelSerializer):
+#     email = serializers.EmailField(
+#             validators=[UniqueValidator(queryset=UserModel.objects.all())]
+#             )
+#     username = serializers.CharField(
+#             validators=[UniqueValidator(queryset=UserModel.objects.all())]
+#             )
+#     password = serializers.CharField(write_only=True)
+#     phone = serializers.CharField(validators=[UniqueValidator(queryset=UserModel.objects.all())], required=False)
+
+    # def create(self, validated_data):
+    #     user = UserModel.objects.create_user(
+    #         username=validated_data['username'], 
+    #         email=validated_data['email'],
+    #         password=validated_data['password'],
+    #         first_name=validated_data['first_name'],
+    #         last_name=validated_data['last_name'],
+    #     )
+    #     return user
+#     class Meta:
+#         model = UserModel
+#         fields = [
+
+#         ]
+
+
+
+
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
             validators=[UniqueValidator(queryset=UserModel.objects.all())]
@@ -28,14 +56,10 @@ class UserSerializer(serializers.ModelSerializer):
     phone = serializers.CharField(validators=[UniqueValidator(queryset=UserModel.objects.all())], required=False)
 
     def create(self, validated_data):
-        user = UserModel.objects.create_user(
-            username=validated_data['username'], 
-            email=validated_data['email'],
-            password=validated_data['password'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
-            phone = validated_data['phone'],
-        )
+        kwargs={}
+        for (key, value) in validated_data.items():
+            kwargs[key] = value
+        user = UserModel.objects.create_user(**kwargs)
         return user
         
     def update(self, instance, validated_data):
