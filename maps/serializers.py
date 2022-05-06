@@ -25,8 +25,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
             validators=[UniqueValidator(queryset=UserModel.objects.all())]
             )
     password = serializers.CharField(write_only=True)
-    phone = serializers.CharField(validators=[UniqueValidator(queryset=UserModel.objects.all())], required=False)
-
     def create(self, validated_data):
         user = UserModel.objects.create_user(
             username=validated_data['username'], 
