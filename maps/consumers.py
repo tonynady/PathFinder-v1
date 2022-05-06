@@ -9,7 +9,7 @@ from .serializers import ProjectDataSerializer
 class StartProjectConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         us = self.scope["user"]
-        print(f"the user is {us}............")
+        print(f"the user is {us is not None}............")
         self.room_group_name = 'new-project'
 
         await self.channel_layer.group_add(
@@ -54,7 +54,7 @@ class StartProjectConsumer(AsyncWebsocketConsumer):
 class ProjectDataConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         us = self.scope["user"]
-        print(f"the user is {us}............")
+        print(f"the user is {us is not None}............")
         
         self.project_id = self.scope['url_route']['kwargs']['project_id']
         self.project = await database_sync_to_async(Project.objects.get)(project_id = self.project_id)
