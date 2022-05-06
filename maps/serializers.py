@@ -34,6 +34,8 @@ class UserSerializer(serializers.ModelSerializer):
             password=validated_data['password'],
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
+            phone = validated_data['phone'],
+            image = validated_data['image'],
         )
         return user
         
