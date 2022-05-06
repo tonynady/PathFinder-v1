@@ -35,7 +35,7 @@ schema_view = get_schema_view(
    openapi.Info(
       title="PathFinder APIs",
       default_version='v1',
-      description="The complete docs for PathFinder REST APIs, the websocket APIs are not included.",
+      description="The complete Docs for PathFinder REST APIs, the websocket APIs are not included.",
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="contact@snippets.local"),
       license=openapi.License(name="BSD License"),
