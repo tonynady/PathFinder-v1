@@ -11,7 +11,6 @@ from django.contrib.auth.models import AbstractUser
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT /Users_Images/ user_<id>/<filename>
-    print(f"The instance id is {instance.id}")
     return 'Users_Images/user_{0}/{1}'.format(instance.id, filename)
 class MyUser(AbstractUser):
     phone = models.CharField(max_length=12, unique=True, null=True, blank=True)
