@@ -178,6 +178,8 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
 CORS_ALLOW_CREDENTIALS = True
+# CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = False
 
 CSRF_TRUSTED_ORIGINS=['https://pathfinder-v1.herokuapp.com', 'http://pathfinder-v1.herokuapp.com']
 
@@ -187,6 +189,5 @@ AWS_ACCESS_KEY_ID = 'AKIAWDJFU4MXUUIQJDEJ'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'pathfinder-bucket'
 AWS_DEFAULT_ACL = None
-
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
