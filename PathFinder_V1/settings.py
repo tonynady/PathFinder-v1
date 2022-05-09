@@ -172,18 +172,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ]
 CORS_ALLOW_ALL_ORIGINS = True
 
-# CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SAMESITE = 'Lax'
 # SESSION_COOKIE_SAMESITE = 'Lax'
-CSRF_COOKIE_SAMESITE = 'None'
+# CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
 CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_HTTPONLY = False
+# CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_HTTPONLY = False
 
-CSRF_TRUSTED_ORIGINS=['https://pathfinder-v1.herokuapp.com', 'http://pathfinder-v1.herokuapp.com', 'http://localhost:3000']
+CSRF_TRUSTED_ORIGINS=['https://pathfinder-v1.herokuapp.com', 'http://pathfinder-v1.herokuapp.com'] #, 'http://localhost:3000'
 
 
 
