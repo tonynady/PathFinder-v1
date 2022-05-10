@@ -31,7 +31,7 @@ class UserAccountView(generics.RetrieveAPIView):
     Get the logged in user's account details.
     '''
     serializer_class = UserSerializer
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
@@ -49,7 +49,7 @@ class UserDetailAPIView(generics.RetrieveAPIView):
     '''
     serializer_class = UserSerializer
     queryset = UserModel.objects.all()
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [
         permissions.IsAuthenticated,
         permissions.IsAdminUser,
@@ -68,7 +68,7 @@ class UserListAPIView(generics.ListAPIView):
     '''
     serializer_class = UserSerializer
     queryset = UserModel.objects.all()
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [
         permissions.IsAuthenticated,
         permissions.IsAdminUser,
@@ -90,7 +90,7 @@ class UserUpdateAPIView(generics.UpdateAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserSerializer
     lookup_field = "pk"
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self, *args, **kwargs):
@@ -116,7 +116,7 @@ class UserDeleteAPIView(generics.DestroyAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserSerializer
     lookup_field = "pk"
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
     
     def get_queryset(self, *args, **kwargs):
@@ -144,7 +144,7 @@ class LoginView(generics.CreateAPIView):
         return Response({'detail':'Invalid Credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class LogoutView(APIView):
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
@@ -157,7 +157,7 @@ class ProjectCreateAPIView(generics.CreateAPIView):
     Create a Project for the logged in user.
     '''
     serializer_class = CreateUpdateProjectSerializer
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -174,7 +174,7 @@ class ProjectListAPIView(generics.ListAPIView):
     '''
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self, *args, **kwargs):
@@ -188,7 +188,7 @@ class ProjectListByRobotMixinView(mixins.ListModelMixin, generics.GenericAPIView
     Get all the projects performed by a certain robot. Only superusers can view them.
     '''
     serializer_class = ProjectSerializer
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [
         permissions.IsAuthenticated,
         permissions.IsAdminUser,
@@ -211,7 +211,7 @@ class ProjectDetailAPIView(generics.RetrieveAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     lookup_field = 'project_id'
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self, *args, **kwargs):
@@ -228,7 +228,7 @@ class ProjectUpdateAPIView(generics.UpdateAPIView):
     queryset = Project.objects.all()
     serializer_class = CreateUpdateProjectSerializer
     lookup_field = "project_id"
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated] #IsProjectDoneOrWorking
 
     def get_queryset(self, *args, **kwargs):
@@ -258,7 +258,7 @@ class ProjectDeleteAPIView(generics.DestroyAPIView):
     '''
     queryset = Project.objects.all()
     lookup_field = "project_id"
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self, *args, **kwargs):
@@ -279,7 +279,7 @@ class RobotCreateAPIView(generics.CreateAPIView):
     Create a New Robot. Only admins can create robots.
     '''
     serializer_class = RobotSerializer
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [
         permissions.IsAuthenticated,
         permissions.IsAdminUser,
@@ -292,7 +292,7 @@ class RobotListAPIView(generics.ListAPIView):
     '''
     queryset = Robot.objects.all()
     serializer_class = RobotSerializer
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 class RobotDetailAPIView(generics.RetrieveAPIView):
@@ -303,7 +303,7 @@ class RobotDetailAPIView(generics.RetrieveAPIView):
     queryset = Robot.objects.all()
     serializer_class = RobotSerializer
     lookup_field = 'robot_id' #pk and then must modify the url param.
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
 class RobotUpdateAPIView(generics.UpdateAPIView):
@@ -313,7 +313,7 @@ class RobotUpdateAPIView(generics.UpdateAPIView):
     queryset = Robot.objects.all()
     serializer_class = RobotSerializer
     lookup_field = "robot_id"
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [
         permissions.IsAuthenticated,
         permissions.IsAdminUser,
@@ -334,7 +334,7 @@ class RobotDeleteAPIView(generics.DestroyAPIView):
     '''
     queryset = Robot.objects.all()
     lookup_field = "robot_id"
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [
         permissions.IsAuthenticated,
         permissions.IsAdminUser,
@@ -348,7 +348,7 @@ class ProjectDataListMixinView(mixins.ListModelMixin, generics.GenericAPIView):
     Only the superusers are allowed to view any data.
     '''
     serializer_class = ProjectDataSerializer
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
@@ -368,7 +368,7 @@ class ProjectDataWithinRange(generics.CreateAPIView):
     Only the superusers are allowed to view any data.
     '''
     serializer_class = ProjectDataSerializer
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
@@ -388,7 +388,7 @@ class ProjectDataWithinRange(generics.CreateAPIView):
 
 class ProjectDataPoisonous(generics.ListCreateAPIView):
     serializer_class = ProjectDataSerializer
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
