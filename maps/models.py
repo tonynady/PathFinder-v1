@@ -10,7 +10,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 
 def user_directory_path(instance, filename):
-    # file will be uploaded to MEDIA_ROOT /Users_Images/ user_<id>/<filename>
+    # file will be uploaded to MEDIA_ROOT /Users_Images/user_<id>/<filename>
     return 'Users_Images/user_{0}/{1}'.format(instance.id, filename)
 class MyUser(AbstractUser):
     phone = models.CharField(max_length=12, unique=True, null=True, blank=True)
@@ -18,10 +18,11 @@ class MyUser(AbstractUser):
 
 
 def robot_directory_path(instance, filename):
-    # file will be uploaded to MEDIA_ROOT /Robots_Images/ robot_<id>/<filename>
+    # file will be uploaded to MEDIA_ROOT /Robots_Images/robot_<id>/<filename>
     return 'Robots_Images/robot_{0}/{1}'.format(instance.robot_id, filename)
 class Robot(models.Model):
     robot_id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     robot_name = models.CharField(max_length=20)
     is_assigned = models.BooleanField(default=False)
     at_maintainance = models.BooleanField(default=False)
@@ -36,6 +37,9 @@ class Robot(models.Model):
         return f"{self.robot_name}"
 
 
+def map_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT /maps/project_<id>_map/<filename>
+    return 'maps/project_{0}_map/{1}'.format(instance.robot_id, filename)
 class Project(models.Model):
     project_id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
@@ -47,7 +51,7 @@ class Project(models.Model):
     control_type = models.CharField(max_length=15, choices=control_choices)
     created = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True, blank=True, null=True)
-    map = models.TextField(blank=True, null=True)  # This field type is a guess.
+    map = models.ImageField(upload_to=map_directory_path, null=True, blank=True)
     project_address = models.CharField(max_length=50)
 
     class Meta:

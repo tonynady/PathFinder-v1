@@ -145,17 +145,26 @@ class ProjectDataSerializer(serializers.ModelSerializer):
         #     'time_collected',
         # ]
 
+class RobotCreateUpdateSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(read_only=True)
+    is_assigned = serializers.BooleanField(read_only=True)
+    at_maintainance = serializers.BooleanField(read_only=True)
+    class Meta:
+        model = Robot
+        fields = [
+            'robot_id',
+            'user',
+            'robot_name',
+            'is_assigned',
+            'at_maintainance',
+            'robot_image',
+            'ip_address',
+        ]
 class RobotSerializer(serializers.ModelSerializer):
     class Meta:
         model = Robot
         fields = '__all__'
-        # fields = [
-        #     'robot_id',
-        #     'robot_name',
-        #     'robot_status',
-        #     'robot_image',
-        #     'ip_address',
-        # ]
+
 
 class CameraFrameSerializer(serializers.ModelSerializer):
     class Meta:

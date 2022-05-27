@@ -11,7 +11,8 @@ from .serializers import (
     ProjectSerializer,
     CreateUpdateProjectSerializer,
     ProjectDataSerializer, 
-    RobotSerializer, 
+    RobotSerializer,
+    RobotCreateUpdateSerializer,
     UserSerializer,
     UserLoginSerializer,
     UserCreateSerializer,
@@ -276,29 +277,36 @@ class ProjectDeleteAPIView(generics.DestroyAPIView):
 
 class RobotCreateAPIView(generics.CreateAPIView):
     '''
-    Create a New Robot. Only admins can create robots.
+    Create a New Robot. Any logged in user can create robots.
     '''
-    serializer_class = RobotSerializer
+    serializer_class = RobotCreateUpdateSerializer
     authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [
         permissions.IsAuthenticated,
-        permissions.IsAdminUser,
+        # permissions.IsAdminUser,
     ]
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 class RobotListAPIView(generics.ListAPIView):
     '''
-    Get a list of all the robots on the system.
-    Any authenticated user can view them.
+    Get a list of all the robots created by the logged in user.
+    Only superusers can view all the robots on the system.
     '''
     queryset = Robot.objects.all()
     serializer_class = RobotSerializer
     authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        if self.request.user.is_superuser:
+            return qs
+        return qs.filter(user = self.request.user)
 
 class RobotDetailAPIView(generics.RetrieveAPIView):
     '''
-    Get the details of a certain robot.
-    Any authenticated user can view these data.
+    Get the details of a certain robot that must belong to the logged in user.
+    Only superusers can view any robot.
     '''
     queryset = Robot.objects.all()
     serializer_class = RobotSerializer
@@ -306,18 +314,31 @@ class RobotDetailAPIView(generics.RetrieveAPIView):
     authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        if self.request.user.is_superuser:
+            return qs
+        return qs.filter(user = self.request.user)
+
 class RobotUpdateAPIView(generics.UpdateAPIView):
     '''
-    Update a certain robot. Only admins can update robots.
+    Update a certain robot that must belong to the logged in user. 
+    Only superusers can update robot.
     '''
     queryset = Robot.objects.all()
-    serializer_class = RobotSerializer
+    serializer_class = RobotCreateUpdateSerializer
     lookup_field = "robot_id"
     authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [
         permissions.IsAuthenticated,
-        permissions.IsAdminUser,
+        # permissions.IsAdminUser,
     ]
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        if self.request.user.is_superuser:
+            return qs
+        return qs.filter(user = self.request.user)
 
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -330,15 +351,21 @@ class RobotUpdateAPIView(generics.UpdateAPIView):
 
 class RobotDeleteAPIView(generics.DestroyAPIView):
     '''
-    Delete a Robot. Only admins can delete robots.
+    Delete a Robot that must belong to the logged in user. 
+    Only admins can delete any robot.
     '''
     queryset = Robot.objects.all()
     lookup_field = "robot_id"
     authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
     permission_classes = [
         permissions.IsAuthenticated,
-        permissions.IsAdminUser,
+        # permissions.IsAdminUser,
     ]
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        if self.request.user.is_superuser:
+            return qs
+        return qs.filter(user = self.request.user)
 
 
 class ProjectDataListMixinView(mixins.ListModelMixin, generics.GenericAPIView):
@@ -374,7 +401,7 @@ class ProjectDataWithinRange(generics.CreateAPIView):
     def post(self, request, *args, **kwargs):
         data = request.data
         proj = Project.objects.get(project_id=kwargs.get("project_id"))
-        if proj in Project.objects.filter(user=request.user) or request.user.is_superuser:
+        if request.user.is_superuser or proj in Project.objects.filter(user=request.user):
             queryset = ProjectData.objects.filter(
                 project_id=kwargs.get("project_id"),
                 time_collected__range=(data["inst1"], data["inst2"])
